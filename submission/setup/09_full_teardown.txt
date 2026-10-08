@@ -1,0 +1,153 @@
+################ 1. AgentCore runtime ################
+$ uv run agentcore destroy --force
+⚠️  About to destroy resources for agent 'customer_support_agent'
+
+Current deployment:
+  • Agent ARN: 
+arn:aws:bedrock-agentcore:us-east-1:080300824948:runtime/customer_support_agent-
+5VhbaJ9oWH
+  • Agent ID: customer_support_agent-5VhbaJ9oWH
+  • Execution Role: 
+arn:aws:iam::080300824948:role/AmazonBedrockAgentCoreSDKRuntime-us-east-1-aa96c3
+a063
+
+Starting destroy operation for agent: customer_support_agent (dry_run=False, delete_ecr_repo=False)
+DEFAULT endpoint will be automatically deleted with agent
+Deleted AgentCore agent: arn:aws:bedrock-agentcore:us-east-1:080300824948:runtime/customer_support_agent-5VhbaJ9oWH
+Skipping CodeBuild cleanup for direct_code_deploy deployment
+Deleted S3 artifact: customer_support_agent/deployment.zip
+Deleted S3 artifact: customer_support_agent/source.zip
+Skipping CodeBuild IAM role cleanup for direct_code_deploy deployment
+Deleted IAM role: AmazonBedrockAgentCoreSDKRuntime-us-east-1-aa96c3a063
+Removed agent configuration: customer_support_agent
+Cleared default agent (no agents remaining)
+Removed configuration file: /Users/magdy/dev/AI-ML-Nanodegree/cd14763-project-starter/starter/.bedrock_agentcore.yaml
+Destroy operation completed. Resources removed: 6, Warnings: 0, Errors: 0
+✅ Successfully destroyed resources for agent 'customer_support_agent'
+
+╭────────────────────── Resources Successfully Destroyed ──────────────────────╮
+│   ✓ AgentCore agent:                                                         │
+│ arn:aws:bedrock-agentcore:us-east-1:080300824948:runtime/customer_support_ag │
+│ ent-5VhbaJ9oWH                                                               │
+│   ✓ S3 artifact:                                                             │
+│ s3://bedrock-agentcore-codebuild-sources-080300824948-us-east-1/customer_sup │
+│ port_agent/deployment.zip                                                    │
+│   ✓ S3 artifact:                                                             │
+│ s3://bedrock-agentcore-codebuild-sources-080300824948-us-east-1/customer_sup │
+│ port_agent/source.zip                                                        │
+│   ✓ IAM execution role:                                                      │
+│ AmazonBedrockAgentCoreSDKRuntime-us-east-1-aa96c3a063                        │
+│   ✓ Agent configuration: customer_support_agent                              │
+│   ✓ Configuration file (no agents remaining)                                 │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Next steps:
+  • Run 'agentcore configure --entrypoint <file>' to set up a new agent
+  • Run 'agentcore deploy' to deploy to Bedrock AgentCore
+[exit 0]
+
+$ aws logs delete-delivery --id cqkkEIpyiXvVMwNE
+[exit 0]
+
+$ aws logs delete-delivery-source --name customer_support_agent-5VhbaJ9oWH-traces-source
+[exit 0]
+
+$ aws logs delete-delivery-destination --name customer_support_agent-5VhbaJ9oWH-traces-destination
+[exit 0]
+
+$ aws s3 rm s3://bedrock-agentcore-codebuild-sources-080300824948-us-east-1 --recursive
+[exit 0]
+
+$ aws s3api delete-bucket --bucket bedrock-agentcore-codebuild-sources-080300824948-us-east-1
+[exit 0]
+
+################ 2. Knowledge Base ################
+$ aws bedrock-agent delete-data-source --knowledge-base-id IUPTCE7YRR --data-source-id MWTWJSO9JQ --query status --output text
+DELETING
+[exit 0]
+
+data source MWTWJSO9JQ: deleted
+
+$ aws bedrock-agent delete-knowledge-base --knowledge-base-id IUPTCE7YRR --query status --output text
+DELETING
+[exit 0]
+
+knowledge base IUPTCE7YRR: deleted
+
+$ aws iam delete-role-policy --role-name CustomerSupportKBRole --policy-name ReadProductCatalogBucket
+[exit 0]
+
+$ aws iam delete-role --role-name CustomerSupportKBRole
+[exit 0]
+
+$ aws s3 rm s3://csai-kb-080300824948-us-east-1 --recursive
+delete: s3://csai-kb-080300824948-us-east-1/product_catalog.txt
+[exit 0]
+
+$ aws s3api delete-bucket --bucket csai-kb-080300824948-us-east-1
+[exit 0]
+
+################ 3. Memory ################
+$ aws bedrock-agentcore-control delete-memory --memory-id CustomerSupportMemory-MpfCY7AqJ3 --query status --output text
+DELETING
+[exit 0]
+
+memory CustomerSupportMemory-MpfCY7AqJ3: deleted
+
+################ 4. REST API ################
+$ aws apigateway delete-rest-api --rest-api-id 8576s2huj1
+[exit 0]
+
+################ 5. Lambdas and their roles ################
+$ aws lambda delete-function --function-name order-tracker
+{
+    "StatusCode": 204
+}
+[exit 0]
+
+$ aws iam detach-role-policy --role-name order-tracker-role-2beeifwa --policy-arn arn:aws:iam::080300824948:policy/service-role/AWSLambdaBasicExecutionRole-65638b09-dbfd-4e24-ba2d-8cd209a8c7ab
+[exit 0]
+
+$ aws iam delete-policy --policy-arn arn:aws:iam::080300824948:policy/service-role/AWSLambdaBasicExecutionRole-65638b09-dbfd-4e24-ba2d-8cd209a8c7ab
+[exit 0]
+
+$ aws iam delete-role --role-name order-tracker-role-2beeifwa
+[exit 0]
+
+$ aws lambda delete-function --function-name refund-processor
+{
+    "StatusCode": 204
+}
+[exit 0]
+
+$ aws iam detach-role-policy --role-name refund-processor-role-dwup64sm --policy-arn arn:aws:iam::080300824948:policy/service-role/AWSLambdaBasicExecutionRole-c0c02122-4c1c-4516-bbfd-0f7f00d00122
+[exit 0]
+
+$ aws iam delete-policy --policy-arn arn:aws:iam::080300824948:policy/service-role/AWSLambdaBasicExecutionRole-c0c02122-4c1c-4516-bbfd-0f7f00d00122
+[exit 0]
+
+$ aws iam delete-role --role-name refund-processor-role-dwup64sm
+[exit 0]
+
+################ 6. CloudWatch log groups ################
+$ aws logs delete-log-group --log-group-name /aws/bedrock-agentcore/runtimes/customer_support_agent-5VhbaJ9oWH-DEFAULT
+[exit 0]
+
+$ aws logs delete-log-group --log-group-name /aws/lambda/order-tracker
+[exit 0]
+
+$ aws logs delete-log-group --log-group-name /aws/lambda/refund-processor
+[exit 0]
+
+################ 7. Verification (expect nothing project-related) ################
+runtimes:      
+gateways:      
+memories:      
+KBs:           
+REST APIs:     
+Lambdas:       
+S3 buckets:    
+IAM roles:     AWSServiceRoleForBedrockAgentCoreRuntimeIdentity 
+IAM policies:  
+log groups:    
+log delivery:   

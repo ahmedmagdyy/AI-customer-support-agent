@@ -1,0 +1,27 @@
+# 1. Delete the Gateway targets (a Gateway with targets cannot be deleted)
+$ aws bedrock-agentcore-control --region us-east-1 delete-gateway-target --gateway-identifier customersupportgateway-nujtlaadku --target-id DXAFEB9TV3 --query [targetId,status] --output text
+DXAFEB9TV3	DELETING
+
+$ aws bedrock-agentcore-control --region us-east-1 delete-gateway-target --gateway-identifier customersupportgateway-nujtlaadku --target-id CGVB6AWMKX --query [targetId,status] --output text
+CGVB6AWMKX	DELETING
+
+Targets deleted. Remaining targets: 0
+
+# 2. Delete the Gateway
+$ aws bedrock-agentcore-control --region us-east-1 delete-gateway --gateway-identifier customersupportgateway-nujtlaadku --query [gatewayId,status] --output text
+customersupportgateway-nujtlaadku	DELETING
+
+Gateway deleted.
+
+# 3. Delete the Gateway service role (inline policy first)
+$ aws iam delete-role-policy --role-name CustomerSupportGatewayRole --policy-name InvokeRefundProcessor
+
+$ aws iam delete-role --role-name CustomerSupportGatewayRole
+
+Role deleted.
+
+# Verification
+$ aws bedrock-agentcore-control list-gateways
+[]
+$ aws iam get-role --role-name CustomerSupportGatewayRole
+NoSuchEntity) when calling the GetRole operation: The role with name CustomerSupportGatewayRole cannot be found.
