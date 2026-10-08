@@ -1,0 +1,38 @@
+$ agentcore invoke '{"prompt": "Can you track order ORD-001?", "customer_id": "CUST-123", "session_id": "t1"}'
+
+╭─────────────────────────── customer_support_agent ───────────────────────────╮
+│ Session: e5125e7d-b244-4f43-ae0d-00da0ef15b68                                │
+│ Request ID: 7f08d17a-0dbe-4062-b149-74a873e7dc65                             │
+│ ARN:                                                                         │
+│ arn:aws:bedrock-agentcore:us-east-1:080300824948:runtime/customer_support_ag │
+│ ent-5VhbaJ9oWH                                                               │
+│ Logs: aws logs tail                                                          │
+│ /aws/bedrock-agentcore/runtimes/customer_support_agent-5VhbaJ9oWH-DEFAULT    │
+│ --log-stream-name-prefix "2026/10/08/[runtime-logs" --follow                 │
+│       aws logs tail                                                          │
+│ /aws/bedrock-agentcore/runtimes/customer_support_agent-5VhbaJ9oWH-DEFAULT    │
+│ --log-stream-name-prefix "2026/10/08/[runtime-logs" --since 1h               │
+│ GenAI Dashboard:                                                             │
+│ https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#gen-ai-obser │
+│ vability/agent-core                                                          │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Response:
+Your order **ORD-001** is currently **SHIPPED**. 
+
+**Details:**
+- **Item:** Wireless Headphones Pro (1 x $89.99)
+- **Total:** $89.99
+- **Carrier:** UPS
+- **Tracking Number:** TRK987654321
+- **Estimated Delivery:** October 10, 2026
+
+You can track the shipment progress using the tracking number with UPS. Let me 
+know if you need further assistance!
+
+
+# Tool calls made by the agent during this test
+# (runtime log lines from CloudWatch Logs group /aws/bedrock-agentcore/runtimes/customer_support_agent-5VhbaJ9oWH-DEFAULT)
+
+## session t1
+[session t1] TOOL order-tracker___get_order input={"order_id": "ORD-001"} status=success result={"order_id":"ORD-001","customer_id":"CUST-123","status":"SHIPPED","items":[{"name":"Wireless Headphones Pro","qty":1,"price":89.99}],"total":89.99,"tracking_number":"TRK987654321","carrier":"UPS","estimated_delivery":"2026-10-10"}

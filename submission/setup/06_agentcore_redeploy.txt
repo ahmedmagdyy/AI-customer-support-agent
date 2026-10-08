@@ -1,0 +1,78 @@
+$ uv run agentcore deploy
+
+🚀 Launching Bedrock AgentCore (cloud mode - RECOMMENDED)...
+   • Deploy Python code directly to runtime
+   • No Docker required (DEFAULT behavior)
+   • Production-ready deployment
+
+💡 Deployment options:
+   • agentcore deploy                → Cloud (current)
+   • agentcore deploy --local        → Local development
+
+Launching with direct_code_deploy deployment for agent 'customer_support_agent'
+Memory disabled - skipping memory creation
+Ensuring execution role...
+Using execution role from config: arn:aws:iam::080300824948:role/AmazonBedrockAgentCoreSDKRuntime-us-east-1-aa96c3a063
+Using entrypoint: main.py (relative to /Users/magdy/dev/AI-ML-Nanodegree/cd14763-project-starter/starter)
+Creating deployment package...
+✓ Using cached dependencies (no changes detected)
+Packaging source code...
+Creating deployment package...
+✓ Deployment package ready: 103.10 MB
+Uploading deployment package to S3...
+Uploading to s3://bedrock-agentcore-codebuild-sources-080300824948-us-east-1/customer_support_agent/deployment.zip...
+✓ Deployment package uploaded: s3://bedrock-agentcore-codebuild-sources-080300824948-us-east-1/customer_support_agent/deployment.zip
+Deploying to Bedrock AgentCore Runtime...
+⚠️ Session ID will be reset to connect to the updated agent. The previous agent remains accessible via the original session ID: e4ff60e9-30ba-4037-b68e-e23eabb3df2d
+✅ Agent created/updated: arn:aws:bedrock-agentcore:us-east-1:080300824948:runtime/customer_support_agent-5VhbaJ9oWH
+Waiting for agent endpoint to be ready...
+Enabling observability...
+CloudWatch Logs resource policy already configured
+X-Ray trace destination already configured
+X-Ray trace segment destination is ACTIVE
+X-Ray indexing rule already configured
+Transaction Search already fully configured
+ObservabilityDeliveryManager initialized for region: us-east-1, account: 080300824948
+✅ Logs auto-created by AWS for runtime/customer_support_agent-5VhbaJ9oWH
+✅ Traces delivery enabled for runtime/customer_support_agent-5VhbaJ9oWH
+Observability enabled for runtime/customer_support_agent-5VhbaJ9oWH - logs: True, traces: True
+✅ X-Ray traces delivery enabled for agent customer_support_agent-5VhbaJ9oWH
+🔍 GenAI Observability Dashboard: https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#gen-ai-observability/agent-core
+✅ Deployment completed successfully - Agent: arn:aws:bedrock-agentcore:us-east-1:080300824948:runtime/customer_support_agent-5VhbaJ9oWH
+╭───────────────────────────── Deployment Success ─────────────────────────────╮
+│ Agent Details:                                                               │
+│ Agent Name: customer_support_agent                                           │
+│ Agent ARN:                                                                   │
+│ arn:aws:bedrock-agentcore:us-east-1:080300824948:runtime/customer_support_ag │
+│ ent-5VhbaJ9oWH                                                               │
+│ Deployment Type: Direct Code Deploy                                          │
+│                                                                              │
+│ 📦 Code package deployed to Bedrock AgentCore                                │
+│                                                                              │
+│ Next Steps:                                                                  │
+│    agentcore status                                                          │
+│    agentcore invoke '{"prompt": "Hello"}'                                    │
+│                                                                              │
+│ 📋 CloudWatch Logs:                                                          │
+│    /aws/bedrock-agentcore/runtimes/customer_support_agent-5VhbaJ9oWH-DEFAULT │
+│ --log-stream-name-prefix "2026/10/08/[runtime-logs"                          │
+│    /aws/bedrock-agentcore/runtimes/customer_support_agent-5VhbaJ9oWH-DEFAULT │
+│ --log-stream-names "otel-rt-logs"                                            │
+│                                                                              │
+│ 🔍 GenAI Observability Dashboard:                                            │
+│    https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#gen-ai-ob │
+│ servability/agent-core                                                       │
+│                                                                              │
+│ ⏱️  Note: Observability data may take up to 10 minutes to appear after first │
+│ launch                                                                       │
+│                                                                              │
+│ 💡 Tail logs with:                                                           │
+│    aws logs tail                                                             │
+│ /aws/bedrock-agentcore/runtimes/customer_support_agent-5VhbaJ9oWH-DEFAULT    │
+│ --log-stream-name-prefix "2026/10/08/[runtime-logs" --follow                 │
+│    aws logs tail                                                             │
+│ /aws/bedrock-agentcore/runtimes/customer_support_agent-5VhbaJ9oWH-DEFAULT    │
+│ --log-stream-name-prefix "2026/10/08/[runtime-logs" --since 1h               │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+[exit code: 0]

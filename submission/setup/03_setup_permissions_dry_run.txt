@@ -1,0 +1,41 @@
+$ uv run setup_permissions.py --dry-run
+
+Agent: customer_support_agent
+Execution role: arn:aws:iam::080300824948:role/AmazonBedrockAgentCoreSDKRuntime-us-east-1-aa96c3a063
+Inline policy: CustomerSupportIntegrations
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "bedrock:Retrieve",
+      "Resource": "arn:aws:bedrock:us-east-1:080300824948:knowledge-base/IUPTCE7YRR"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "bedrock-agentcore:GetMemory",
+        "bedrock-agentcore:RetrieveMemoryRecords",
+        "bedrock-agentcore:CreateEvent"
+      ],
+      "Resource": [
+        "arn:aws:bedrock-agentcore:us-east-1:080300824948:memory/CustomerSupportMemory-MpfCY7AqJ3",
+        "arn:aws:bedrock-agentcore:us-east-1:080300824948:memory/CustomerSupportMemory-MpfCY7AqJ3/*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "bedrock-agentcore:StartBrowserSession",
+        "bedrock-agentcore:StopBrowserSession",
+        "bedrock-agentcore:GetBrowserSession",
+        "bedrock-agentcore:UpdateBrowserStream",
+        "bedrock-agentcore:ConnectBrowserAutomationStream"
+      ],
+      "Resource": "arn:aws:bedrock-agentcore:us-east-1:aws:browser/aws.browser.v1"
+    }
+  ]
+}
+Preview only; no AWS calls or changes made.
+
+[exit code: 0]

@@ -1,0 +1,42 @@
+# ── Secrets and environment files ────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+credentials
+credentials.*
+.aws/
+*secret*
+*.tfvars
+
+# ── Account-specific AWS resource IDs and ARNs ───────────────────────────────
+# Written by the infra/ setup scripts; copy config.example.json to start fresh.
+starter/config.json
+
+# AgentCore Starter Toolkit deployment config (account ID, roles, runtime ID)
+# and its build cache (~100 MB dependency zips).
+.bedrock_agentcore.yaml
+.bedrock_agentcore/
+
+# ── Python ───────────────────────────────────────────────────────────────────
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ── OS and editor files ──────────────────────────────────────────────────────
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*~
+
+# ── Logs ─────────────────────────────────────────────────────────────────────
+*.log

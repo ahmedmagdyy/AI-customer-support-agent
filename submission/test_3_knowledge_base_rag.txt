@@ -1,0 +1,35 @@
+$ agentcore invoke '{"prompt": "What are the benefits of the Platinum loyalty tier?", "customer_id": "CUST-123", "session_id": "t3"}'
+
+╭─────────────────────────── customer_support_agent ───────────────────────────╮
+│ Session: e5125e7d-b244-4f43-ae0d-00da0ef15b68                                │
+│ Request ID: 2e86ca89-045f-4170-93e1-324c84f29f64                             │
+│ ARN:                                                                         │
+│ arn:aws:bedrock-agentcore:us-east-1:080300824948:runtime/customer_support_ag │
+│ ent-5VhbaJ9oWH                                                               │
+│ Logs: aws logs tail                                                          │
+│ /aws/bedrock-agentcore/runtimes/customer_support_agent-5VhbaJ9oWH-DEFAULT    │
+│ --log-stream-name-prefix "2026/10/08/[runtime-logs" --follow                 │
+│       aws logs tail                                                          │
+│ /aws/bedrock-agentcore/runtimes/customer_support_agent-5VhbaJ9oWH-DEFAULT    │
+│ --log-stream-name-prefix "2026/10/08/[runtime-logs" --since 1h               │
+│ GenAI Dashboard:                                                             │
+│ https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#gen-ai-obser │
+│ vability/agent-core                                                          │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Response:
+The **Platinum loyalty tier** offers the following benefits:
+
+- **Free same-day shipping**  
+- **15% discount** on purchases  
+- **Priority customer support**  
+
+These benefits are available to customers who have accumulated **5,000 or more 
+loyalty points**.
+
+
+# Tool calls made by the agent during this test
+# (runtime log lines from CloudWatch Logs group /aws/bedrock-agentcore/runtimes/customer_support_agent-5VhbaJ9oWH-DEFAULT)
+
+## session t3
+[session t3] TOOL search_knowledge_base input={"query": "benefits of the Platinum loyalty tier"} status=success result=- Gold: 1000 to 4999 points

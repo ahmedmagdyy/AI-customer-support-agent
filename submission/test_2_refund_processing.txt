@@ -1,0 +1,38 @@
+$ agentcore invoke '{"prompt": "I want to return my Kindle Paperwhite (ORD-002). Please initiate a refund.", "customer_id": "CUST-123", "session_id": "t2"}'
+
+╭─────────────────────────── customer_support_agent ───────────────────────────╮
+│ Session: e5125e7d-b244-4f43-ae0d-00da0ef15b68                                │
+│ Request ID: 932942df-501a-473f-acb0-c91e14462395                             │
+│ ARN:                                                                         │
+│ arn:aws:bedrock-agentcore:us-east-1:080300824948:runtime/customer_support_ag │
+│ ent-5VhbaJ9oWH                                                               │
+│ Logs: aws logs tail                                                          │
+│ /aws/bedrock-agentcore/runtimes/customer_support_agent-5VhbaJ9oWH-DEFAULT    │
+│ --log-stream-name-prefix "2026/10/08/[runtime-logs" --follow                 │
+│       aws logs tail                                                          │
+│ /aws/bedrock-agentcore/runtimes/customer_support_agent-5VhbaJ9oWH-DEFAULT    │
+│ --log-stream-name-prefix "2026/10/08/[runtime-logs" --since 1h               │
+│ GenAI Dashboard:                                                             │
+│ https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#gen-ai-obser │
+│ vability/agent-core                                                          │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Response:
+Your refund for the Kindle Paperwhite (Order #ORD-002) has been approved! 
+
+**Refund details:**
+- **Refund ID:** REF-D15LM59Q
+- **Amount:** $139.99
+- **Status:** Approved
+- **Credit timeline:** Will appear in your account in 3-5 business days
+
+No further action is needed on your part. The refund has been processed 
+successfully.
+
+
+# Tool calls made by the agent during this test
+# (runtime log lines from CloudWatch Logs group /aws/bedrock-agentcore/runtimes/customer_support_agent-5VhbaJ9oWH-DEFAULT)
+
+## session t2
+[session t2] TOOL order-tracker___get_order input={"order_id": "ORD-002"} status=success result={"order_id":"ORD-002","customer_id":"CUST-123","status":"DELIVERED","items":[{"name":"Kindle Paperwhite","qty":1,"price":139.99}],"total":139.99,"tracking_number":"TRK123456789","carrier":"USPS","delivered_date":"2026-10-05"}
+[session t2] TOOL refund-processor___initiate_refund input={"reason": "Customer requested return", "order_id": "ORD-002", "amount": 139.99} status=success result={"statusCode":200,"body":"{\"refund_id\": \"REF-D15LM59Q\", \"order_id\": \"ORD-002\", \"status\": \"APPROVED\", \"amount\": 139.99, \"message\": \"Refund approved. Credit appears in 3-5 business days.\", \"created_at\": \"2026-10-08T02:37:49.042702+00:00\"}"}

@@ -1,0 +1,44 @@
+$ agentcore invoke '{"prompt": "Hello, what can you help me with?", "customer_id": "CUST-123", "session_id": "test-1"}'
+
+╭─────────────────────────── customer_support_agent ───────────────────────────╮
+│ Session: e4ff60e9-30ba-4037-b68e-e23eabb3df2d                                │
+│ Request ID: a3519d20-9125-4863-87e2-ecb3d69f01c3                             │
+│ ARN:                                                                         │
+│ arn:aws:bedrock-agentcore:us-east-1:080300824948:runtime/customer_support_ag │
+│ ent-5VhbaJ9oWH                                                               │
+│ Logs: aws logs tail                                                          │
+│ /aws/bedrock-agentcore/runtimes/customer_support_agent-5VhbaJ9oWH-DEFAULT    │
+│ --log-stream-name-prefix "2026/10/08/[runtime-logs" --follow                 │
+│       aws logs tail                                                          │
+│ /aws/bedrock-agentcore/runtimes/customer_support_agent-5VhbaJ9oWH-DEFAULT    │
+│ --log-stream-name-prefix "2026/10/08/[runtime-logs" --since 1h               │
+│ GenAI Dashboard:                                                             │
+│ https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#gen-ai-obser │
+│ vability/agent-core                                                          │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Response:
+Hello! I can assist you with various tasks related to your Amazon orders and 
+account. Here's what I can help with:
+
+**Orders & Tracking:**
+- Look up order details and status (processing, shipped, delivered, etc.)
+- Track shipments using order IDs
+- View your order history
+
+**Returns & Refunds:**
+- Initiate refunds for eligible orders
+- Generate return shipping labels
+- Check refund status
+
+**Account Information:**
+- View your loyalty points and tier status (Silver, Gold, Platinum)
+- Check order history by customer ID
+
+To get started, could you please share:
+1. Your customer ID (e.g., CUST-123), **or**
+2. An order ID (e.g., ORD-001) if you have a specific order to discuss
+
+What would you like to look into today?
+
+[exit code: 0]

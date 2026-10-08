@@ -1,0 +1,42 @@
+$ uv run agentcore configure --entrypoint main.py --name customer_support_agent --deployment-type direct_code_deploy --runtime PYTHON_3_13 --disable-memory --region us-east-1 --non-interactive
+
+Configuring Bedrock AgentCore...
+✓ Using detected requirements file: pyproject.toml
+
+🚀 Deployment Configuration
+✓ Using: Direct Code Deploy (python3.13)
+✓ Will auto-create execution role
+✓ Will auto-create S3 bucket
+✓ Using default IAM authorization
+✓ Using default request header configuration
+Configuring BedrockAgentCore agent: customer_support_agent
+Memory disabled
+Network mode: PUBLIC
+Setting 'customer_support_agent' as default agent
+╭─────────────────────────── Configuration Success ────────────────────────────╮
+│ Agent Details                                                                │
+│ Agent Name: customer_support_agent                                           │
+│ Deployment: direct_code_deploy                                               │
+│ Region: us-east-1                                                            │
+│ Account: 080300824948                                                        │
+│ Runtime: python3.13                                                          │
+│                                                                              │
+│ Configuration                                                                │
+│ Execution Role: Auto-create                                                  │
+│ Network Mode: Public                                                         │
+│ S3 Bucket: Auto-create                                                       │
+│ Authorization: IAM (default)                                                 │
+│                                                                              │
+│                                                                              │
+│ Memory: Disabled                                                             │
+│                                                                              │
+│                                                                              │
+│ 📄 Config saved to:                                                          │
+│ /Users/magdy/dev/AI-ML-Nanodegree/cd14763-project-starter/starter/.bedrock_a │
+│ gentcore.yaml                                                                │
+│                                                                              │
+│ Next Steps:                                                                  │
+│ agentcore deploy                                                             │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+[exit code: 0]

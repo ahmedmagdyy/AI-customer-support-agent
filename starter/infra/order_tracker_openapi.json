@@ -1,0 +1,88 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "CustomerSupportAPI",
+    "description": "Order and customer lookup for the customer support agent. Every method is a Lambda proxy integration with the order-tracker function.",
+    "version": "1.0"
+  },
+  "paths": {
+    "/orders/{order_id}": {
+      "get": {
+        "operationId": "get_order",
+        "summary": "Get a single order by its order ID (status, items, total, tracking number, carrier, delivery dates).",
+        "parameters": [
+          {
+            "name": "order_id",
+            "in": "path",
+            "required": true,
+            "description": "Order ID, for example ORD-001",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "The order" },
+          "404": { "description": "Order not found" }
+        },
+        "x-amazon-apigateway-integration": {
+          "type": "aws_proxy",
+          "httpMethod": "POST",
+          "uri": "arn:aws:apigateway:__REGION__:lambda:path/2015-03-31/functions/__ORDER_TRACKER_ARN__/invocations",
+          "passthroughBehavior": "when_no_match",
+          "timeoutInMillis": 29000
+        }
+      }
+    },
+    "/customers/{customer_id}/orders": {
+      "get": {
+        "operationId": "get_customer_orders",
+        "summary": "List all orders that belong to a customer.",
+        "parameters": [
+          {
+            "name": "customer_id",
+            "in": "path",
+            "required": true,
+            "description": "Customer ID, for example CUST-123",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "The customer's orders" },
+          "404": { "description": "No orders found for the customer" }
+        },
+        "x-amazon-apigateway-integration": {
+          "type": "aws_proxy",
+          "httpMethod": "POST",
+          "uri": "arn:aws:apigateway:__REGION__:lambda:path/2015-03-31/functions/__ORDER_TRACKER_ARN__/invocations",
+          "passthroughBehavior": "when_no_match",
+          "timeoutInMillis": 29000
+        }
+      }
+    },
+    "/customers/{customer_id}": {
+      "get": {
+        "operationId": "get_customer",
+        "summary": "Get a customer profile (name, loyalty points, loyalty tier).",
+        "parameters": [
+          {
+            "name": "customer_id",
+            "in": "path",
+            "required": true,
+            "description": "Customer ID, for example CUST-123",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "The customer profile" },
+          "404": { "description": "Customer not found" }
+        },
+        "x-amazon-apigateway-integration": {
+          "type": "aws_proxy",
+          "httpMethod": "POST",
+          "uri": "arn:aws:apigateway:__REGION__:lambda:path/2015-03-31/functions/__ORDER_TRACKER_ARN__/invocations",
+          "passthroughBehavior": "when_no_match",
+          "timeoutInMillis": 29000
+        }
+      }
+    }
+  }
+}

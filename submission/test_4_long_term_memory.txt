@@ -1,0 +1,61 @@
+# Session A — introduce yourself
+$ agentcore invoke '{"prompt": "Hi, I am Jane. I prefer concise responses.", "customer_id": "CUST-123", "session_id": "s-A"}'
+
+╭─────────────────────────── customer_support_agent ───────────────────────────╮
+│ Session: e5125e7d-b244-4f43-ae0d-00da0ef15b68                                │
+│ Request ID: 19bfc9bf-b827-4992-a699-47ca9189160c                             │
+│ ARN:                                                                         │
+│ arn:aws:bedrock-agentcore:us-east-1:080300824948:runtime/customer_support_ag │
+│ ent-5VhbaJ9oWH                                                               │
+│ Logs: aws logs tail                                                          │
+│ /aws/bedrock-agentcore/runtimes/customer_support_agent-5VhbaJ9oWH-DEFAULT    │
+│ --log-stream-name-prefix "2026/10/08/[runtime-logs" --follow                 │
+│       aws logs tail                                                          │
+│ /aws/bedrock-agentcore/runtimes/customer_support_agent-5VhbaJ9oWH-DEFAULT    │
+│ --log-stream-name-prefix "2026/10/08/[runtime-logs" --since 1h               │
+│ GenAI Dashboard:                                                             │
+│ https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#gen-ai-obser │
+│ vability/agent-core                                                          │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Response:
+Hello Jane! I understand you prefer concise responses. How can I help you today?
+If you have an order inquiry, refund request, or any other questions, please let
+me know your order ID or the details of your request.
+
+# Waiting 90 seconds for long-term memory extraction (README: at least 30 seconds)
+$ sleep 90
+
+# Session B (new session) — verify recall
+$ agentcore invoke '{"prompt": "Do you remember my name and communication preference?", "customer_id": "CUST-123", "session_id": "s-B"}'
+
+╭─────────────────────────── customer_support_agent ───────────────────────────╮
+│ Session: e5125e7d-b244-4f43-ae0d-00da0ef15b68                                │
+│ Request ID: 82c28e02-ca97-4f55-ac5d-a95e192d8dbc                             │
+│ ARN:                                                                         │
+│ arn:aws:bedrock-agentcore:us-east-1:080300824948:runtime/customer_support_ag │
+│ ent-5VhbaJ9oWH                                                               │
+│ Logs: aws logs tail                                                          │
+│ /aws/bedrock-agentcore/runtimes/customer_support_agent-5VhbaJ9oWH-DEFAULT    │
+│ --log-stream-name-prefix "2026/10/08/[runtime-logs" --follow                 │
+│       aws logs tail                                                          │
+│ /aws/bedrock-agentcore/runtimes/customer_support_agent-5VhbaJ9oWH-DEFAULT    │
+│ --log-stream-name-prefix "2026/10/08/[runtime-logs" --since 1h               │
+│ GenAI Dashboard:                                                             │
+│ https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#gen-ai-obser │
+│ vability/agent-core                                                          │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Response:
+Hello Jane, I remember your preference for concise responses! I'm here to assist
+you efficiently.
+
+
+# Tool calls made by the agent during this test
+# (runtime log lines from CloudWatch Logs group /aws/bedrock-agentcore/runtimes/customer_support_agent-5VhbaJ9oWH-DEFAULT)
+
+## session s-A
+(no tool calls)
+
+## session s-B
+(no tool calls)

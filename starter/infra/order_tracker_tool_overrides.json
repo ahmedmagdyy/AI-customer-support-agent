@@ -1,0 +1,20 @@
+[
+  {
+    "path": "/orders/{order_id}",
+    "method": "GET",
+    "name": "get_order",
+    "description": "Look up one order by its order ID. Use this whenever the customer refers to a specific order, for example to track it, check whether it shipped or was delivered, or confirm its items and total before a refund or return. Input: order_id such as ORD-001 (case-insensitive). Returns order_id, customer_id, status (PROCESSING, SHIPPED, OUT FOR DELIVERY, DELIVERED or CANCELLED), items (name, qty, price), total in USD, and when available tracking_number, carrier, estimated_delivery or delivered_date. Returns an error if the order does not exist. If the customer does not know the order ID, call get_customer_orders instead. Leave basePath empty."
+  },
+  {
+    "path": "/customers/{customer_id}/orders",
+    "method": "GET",
+    "name": "get_customer_orders",
+    "description": "List every order placed by a customer. Use this when the customer asks about their orders without giving an order ID, or to find which order contains a product before tracking it, refunding it or creating a return label. Input: customer_id such as CUST-123 (case-insensitive). Returns customer_id and an orders array; each order has the same fields as get_order. Returns an error if the customer has no orders. Leave basePath empty."
+  },
+  {
+    "path": "/customers/{customer_id}",
+    "method": "GET",
+    "name": "get_customer",
+    "description": "Get a customer's profile: name, loyalty_points balance and loyalty tier (Silver, Gold or Platinum). Use this to greet or personalise replies, to answer questions about the customer's points or tier, and to get the points and tier needed before calculating a loyalty discount. Input: customer_id such as CUST-123 (case-insensitive). Does not include orders; use get_customer_orders for those. Returns an error if the customer does not exist. Leave basePath empty."
+  }
+]

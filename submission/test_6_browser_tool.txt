@@ -1,0 +1,32 @@
+$ agentcore invoke '{"prompt": "Go to https://www.udacity.com and tell me the page title.", "customer_id": "CUST-123", "session_id": "t6"}'
+
+╭─────────────────────────── customer_support_agent ───────────────────────────╮
+│ Session: be6ac836-c8a9-4384-8a4b-4060b6f8ad74                                │
+│ Request ID: f01a0f92-b386-4628-b917-9a8b1a911794                             │
+│ ARN:                                                                         │
+│ arn:aws:bedrock-agentcore:us-east-1:080300824948:runtime/customer_support_ag │
+│ ent-5VhbaJ9oWH                                                               │
+│ Logs: aws logs tail                                                          │
+│ /aws/bedrock-agentcore/runtimes/customer_support_agent-5VhbaJ9oWH-DEFAULT    │
+│ --log-stream-name-prefix "2026/10/08/[runtime-logs" --follow                 │
+│       aws logs tail                                                          │
+│ /aws/bedrock-agentcore/runtimes/customer_support_agent-5VhbaJ9oWH-DEFAULT    │
+│ --log-stream-name-prefix "2026/10/08/[runtime-logs" --since 1h               │
+│ GenAI Dashboard:                                                             │
+│ https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#gen-ai-obser │
+│ vability/agent-core                                                          │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Response:
+The page title of https://www.udacity.com is:
+
+**"Learn the Latest Tech Skills; Advance Your Career | Udacity"**
+
+
+# Tool calls made by the agent during this test
+# (runtime log lines from CloudWatch Logs group /aws/bedrock-agentcore/runtimes/customer_support_agent-5VhbaJ9oWH-DEFAULT)
+
+## session t6
+[session t6] TOOL browser input={"browser_input": {"action": {"type": "init_session", "description": "Initialize browser session for navigation", "session_name": "udacity-visit"}, "wait_time": 2}} status=success result=
+[session t6] TOOL browser input={"browser_input": {"wait_time": 2, "action": {"type": "navigate", "url": "https://www.udacity.com", "session_name": "udacity-visit"}}} status=error result=Error: Timeout 30000ms exceeded.
+[session t6] TOOL browser input={"browser_input": {"wait_time": 2, "action": {"type": "get_text", "session_name": "udacity-visit", "selector": "title"}}} status=success result=Text content: Learn the Latest Tech Skills; Advance Your Career | Udacity

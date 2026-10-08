@@ -1,0 +1,9 @@
+$ uv run setup_permissions.py
+
+Agent: customer_support_agent
+Execution role: arn:aws:iam::080300824948:role/AmazonBedrockAgentCoreSDKRuntime-us-east-1-aa96c3a063
+Inline policy: CustomerSupportIntegrations
+Permissions applied. Wait briefly for IAM propagation, then invoke your agent.
+Rerunning updates only CustomerSupportIntegrations; other role policies are preserved.
+
+[exit code: 0]
